@@ -5,7 +5,7 @@ spring:
     active: ${SPRING_PROFILES_ACTIVE:dev}
   
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:template_api}?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:template_api}?useSSL=${MYSQL_USE_SSL:false}&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: ${MYSQL_USER:root}
     password: ${MYSQL_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -35,7 +35,7 @@ keycloak:
   realm: ${KEYCLOAK_REALM:api-template}
   resource: ${KEYCLOAK_CLIENT_ID:template-api}
   credentials:
-    secret: ${KEYCLOAK_CLIENT_SECRET:your-client-secret}
+    secret: ${KEYCLOAK_CLIENT_SECRET}
   jwt:
     auth-server-url: ${KEYCLOAK_SERVER_URL:http://localhost:8080}
     realm: ${KEYCLOAK_REALM:api-template}
@@ -48,10 +48,10 @@ springdoc:
     path: /api-docs
   swagger-ui:
     path: /swagger-ui.html
-    enabled: true
+    enabled: ${SWAGGER_ENABLED:true}
   show-actuator: true
 
 logging:
   level:
-    com.euclidesroberto.template_api: DEBUG
-    org.springframework.security: DEBUG
+    com.euclidesroberto.template_api: INFO
+    org.springframework.security: WARN

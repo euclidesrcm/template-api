@@ -289,6 +289,16 @@ mvn verify
 10. **Keycloak Configuration**: Update realm, client, and role names
 11. **Security Rules**: Modify `SecurityConfig.java` for your authorization rules
 
+## Security Considerations
+
+### Production Deployment
+- **Database SSL**: Set `MYSQL_USE_SSL=true` in production to encrypt database connections
+- **Swagger UI**: Disable Swagger UI in production by setting `SWAGGER_ENABLED=false` or using the `prod` profile
+- **Logging**: Ensure logging level is set to INFO or WARN in production (default in `application-prod.yml`)
+- **Environment Variables**: Never commit `.env` file with real credentials. Use `.env.example` as a template
+- **CORS**: Restrict `CORS_ALLOWED_ORIGINS` to only your trusted frontend domains
+- **Keycloak Secret**: Set a strong, random client secret in Keycloak and configure it via environment variable
+
 ## Troubleshooting
 
 ### Database Connection Issues
